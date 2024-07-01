@@ -6,11 +6,24 @@ const appSettings = {
 const app = initializeApp(appSettings)
 const database = getDatabase(app)
 const habitsInDB = ref(database, "habits")
+
 const inputFieldEl = document.getElementById("input-field")
 const addButtonEl = document.getElementById("add-button")
-
+const habitListEl = document.getElementById("habit-list")
 addButtonEl.addEventListener("click", function() {
     let inputValue = inputFieldEl.value
     push(habitsInDB, inputValue)
+    addHabitToList(inputValue)
+    clear(inputFieldEl)
     console.log(`${inputValue} added to database`)
 })
+
+function clear(el){
+    el.value = ""
+}
+
+function addHabitToList(inputValue){
+    habitListEl.innerHTML += `
+        <li>${inputValue}</li>
+    `
+}
