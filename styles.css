@@ -1,0 +1,37 @@
+html, body {
+    padding: 0;
+    margin: 0;
+    font-family: "Rubik", sans-serif;
+    background-color: aliceblue;
+}
+
+input{
+    color: #432000;
+    background-color: #DCE1EB;
+}
+
+button{
+    color: aliceblue;
+    background-color: blue;
+}
+
+.container{
+    display: flex;
+    flex-direction: column;
+    max-width: 320px;
+    margin: 30px auto;
+}
+
+img{
+    margin: 0 auto;
+}
+
+input, button {
+    border: 0;
+    padding: 15px;
+    border-radius: 8px;
+    font-size: 20px;
+    text-align: center;
+    margin: 10px 0;
+    font-family: "Rubik", sans-serif;
+}
