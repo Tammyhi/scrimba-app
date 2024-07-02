@@ -1,5 +1,5 @@
 import {initializeApp} from "https://www.gstatic.com/firebasejs/9.15.0/firebase-app.js"
-import { getDatabase, ref, push, onValue } from "https://www.gstatic.com/firebasejs/9.15.0/firebase-database.js"
+import { getDatabase, ref, push, onValue, remove } from "https://www.gstatic.com/firebasejs/9.15.0/firebase-database.js"
 const appSettings = {
     databaseURL: "https://gamified-habit-tracker-7dfc5-default-rtdb.firebaseio.com/"
 }
@@ -39,5 +39,10 @@ function addHabitToList(habit){
     let habitVal = habit[1]
     let newHabitEl = document.createElement("li")
     newHabitEl.textContent = habitVal
+    newHabitEl.addEventListener("click", function(){
+        let habitLoco = ref(database, `habits/${habitID}`)
+        remove(habitLoco)
+        console.log(habitID)
+    })
     habitListEl.append(newHabitEl)
 }
