@@ -17,9 +17,11 @@ addButtonEl.addEventListener("click", function() {
 })
 
 onValue(habitsInDB, function(snapshot){
-    let habitsArr = Object.values(snapshot.val())
+    let habitsArr = Object.entries(snapshot.val())
     clearList()
     for(let i = 0; i < habitsArr.length; i++){
+        let currHabitID = habitsArr[i][0]
+        let currHabitVal = habitsArr[i][1]
         addHabitToList(habitsArr[i])
     }
 })
@@ -32,8 +34,10 @@ function clearInput(el){
     el.value = ""
 }
 
-function addHabitToList(inputValue){
-    habitListEl.innerHTML += `
-        <li>${inputValue}</li>
-    `
+function addHabitToList(habit){
+    let habitID = habit[0]
+    let habitVal = habit[1]
+    let newHabitEl = document.createElement("li")
+    newHabitEl.textContent = habitVal
+    habitListEl.append(newHabitEl)
 }
