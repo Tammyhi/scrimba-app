@@ -17,13 +17,19 @@ addButtonEl.addEventListener("click", function() {
 })
 
 onValue(habitsInDB, function(snapshot){
-    let habitsArr = Object.entries(snapshot.val())
-    clearList()
-    for(let i = 0; i < habitsArr.length; i++){
-        let currHabitID = habitsArr[i][0]
-        let currHabitVal = habitsArr[i][1]
-        addHabitToList(habitsArr[i])
+    if(snapshot.exists()){
+        let habitsArr = Object.entries(snapshot.val())
+        clearList()
+        for(let i = 0; i < habitsArr.length; i++){
+            let currHabitID = habitsArr[i][0]
+            let currHabitVal = habitsArr[i][1]
+            addHabitToList(habitsArr[i])
+        }
     }
+    else{
+        habitListEl.innerHTML = "No habits started"
+    }
+    
 })
 
 function clearList(){
