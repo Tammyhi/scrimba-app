@@ -1,5 +1,5 @@
 import {initializeApp} from "https://www.gstatic.com/firebasejs/9.15.0/firebase-app.js"
-import { getDatabase, ref, push } from "https://www.gstatic.com/firebasejs/9.15.0/firebase-database.js"
+import { getDatabase, ref, push, onValue } from "https://www.gstatic.com/firebasejs/9.15.0/firebase-database.js"
 const appSettings = {
     databaseURL: "https://gamified-habit-tracker-7dfc5-default-rtdb.firebaseio.com/"
 }
@@ -13,12 +13,22 @@ const habitListEl = document.getElementById("habit-list")
 addButtonEl.addEventListener("click", function() {
     let inputValue = inputFieldEl.value
     push(habitsInDB, inputValue)
-    addHabitToList(inputValue)
-    clear(inputFieldEl)
-    console.log(`${inputValue} added to database`)
+    clearInput(inputFieldEl)
 })
 
-function clear(el){
+onValue(habitsInDB, function(snapshot){
+    let habitsArr = Object.values(snapshot.val())
+    clearList()
+    for(let i = 0; i < habitsArr.length; i++){
+        addHabitToList(habitsArr[i])
+    }
+})
+
+function clearList(){
+    habitListEl.innerHTML = ""
+}
+
+function clearInput(el){
     el.value = ""
 }
 
